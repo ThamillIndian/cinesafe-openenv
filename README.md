@@ -1,3 +1,13 @@
+---
+title: CineSafe-OpenEnv
+emoji: 🎬
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # 🎬 CineSafe-OpenEnv 
 ### *Reliable AI Planning for Real-World Film Production Safety*
 
