@@ -1,0 +1,44 @@
+{
+  "scenario_id": "hard_001",
+  "task_id": "disruption_recovery",
+  "difficulty": "hard",
+  "title": "Night Action Sequence with Permit Risk",
+  "budget_limit": 180000,
+  "day_limit": 3,
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "heading": "EXT. WAREHOUSE - NIGHT",
+      "location": "warehouse",
+      "time_of_day": "night",
+      "cast": ["lead_actor", "stunt_double"],
+      "stunt_required": true,
+      "special_fx": true,
+      "child_actor": false,
+      "animals": false,
+      "weather_dependency": false,
+      "summary": "Fight sequence with sparks and breakaway glass"
+    }
+  ],
+  "constraints": {
+    "available_departments": ["stunts", "camera", "lighting", "sfx", "medical"],
+    "actor_unavailable_after_day": 2,
+    "permit_cutoff_hour": 23,
+    "max_night_shoot_hours": 6
+  },
+  "hidden_context": {
+    "weather_alert_possible": false,
+    "glass_vendor_limited_stock": true
+  },
+  "gold": {
+    "critical_risks": ["stunt", "glass_break", "electrical_sparks"],
+    "required_departments": ["stunts", "medical", "sfx"],
+    "acceptable_schedule_patterns": [["S1"]],
+    "budget_range": [150000, 180000],
+    "must_include_mitigations": [
+      "safety briefing",
+      "protective equipment",
+      "breakaway glass handling"
+    ]
+  }
+}

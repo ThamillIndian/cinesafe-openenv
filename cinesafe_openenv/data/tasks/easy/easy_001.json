@@ -1,0 +1,34 @@
+{
+  "scenario_id": "easy_001",
+  "task_id": "scene_risk_triage",
+  "difficulty": "easy",
+  "title": "Indoor Fight with Breakaway Glass",
+  "budget_limit": 50000,
+  "day_limit": 1,
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "heading": "INT. BAR - NIGHT",
+      "location": "bar",
+      "time_of_day": "night",
+      "cast": ["lead_actor", "stunt_actor"],
+      "stunt_required": true,
+      "special_fx": false,
+      "child_actor": false,
+      "animals": false,
+      "weather_dependency": false,
+      "summary": "A bar fight breaks out ending with someone thrown through a breakaway glass window."
+    }
+  ],
+  "constraints": {
+    "available_departments": ["stunts", "camera", "medical", "art"]
+  },
+  "hidden_context": {},
+  "gold": {
+    "critical_risks": ["stunt", "glass", "night_shoot"],
+    "required_departments": ["stunts", "medical", "art"],
+    "acceptable_schedule_patterns": [["S1"]],
+    "budget_range": [30000, 50000],
+    "must_include_mitigations": ["safety briefing", "breakaway glass protocol", "medic on standby"]
+  }
+}

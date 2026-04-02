@@ -1,0 +1,7 @@
+{
+  "100": {
+    "easy": ["easy_001"],
+    "medium": ["medium_001"],
+    "hard": ["hard_001"]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "scenario_id": "medium_001",
+  "task_id": "multi_scene_planning",
+  "difficulty": "medium",
+  "title": "Location Clustering with Constraints",
+  "budget_limit": 120000,
+  "day_limit": 2,
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "heading": "EXT. PARK - DAY",
+      "location": "park",
+      "time_of_day": "day",
+      "cast": ["lead_actor", "supporting_actor"],
+      "stunt_required": false,
+      "special_fx": false,
+      "child_actor": true,
+      "animals": true,
+      "weather_dependency": true,
+      "summary": "Walk and talk through the park with a dog."
+    },
+    {
+      "scene_id": "S2",
+      "heading": "INT. CAFE - DAY",
+      "location": "cafe",
+      "time_of_day": "day",
+      "cast": ["lead_actor", "supporting_actor"],
+      "stunt_required": false,
+      "special_fx": false,
+      "child_actor": false,
+      "animals": false,
+      "weather_dependency": false,
+      "summary": "Conversation inside the cafe over coffee."
+    },
+    {
+      "scene_id": "S3",
+      "heading": "EXT. PARK - EVENING",
+      "location": "park",
+      "time_of_day": "evening",
+      "cast": ["lead_actor"],
+      "stunt_required": false,
+      "special_fx": false,
+      "child_actor": false,
+      "animals": false,
+      "weather_dependency": true,
+      "summary": "Lead actor runs through the park at dusk."
+    }
+  ],
+  "constraints": {
+    "available_departments": ["camera", "medical", "animal_handling", "lighting"],
+    "location_availability": {
+      "park": "available all days",
+      "cafe": "available only day 1"
+    }
+  },
+  "hidden_context": {},
+  "gold": {
+    "critical_risks": ["animal", "child_actor", "weather"],
+    "required_departments": ["animal_handling", "medical", "camera", "lighting"],
+    "acceptable_schedule_patterns": [
+      ["S2", "S1", "S3"],
+      ["S2", "S3", "S1"]
+    ],
+    "budget_range": [80000, 110000],
+    "must_include_mitigations": ["child labor law compliance", "animal handler present"]
+  }
+}

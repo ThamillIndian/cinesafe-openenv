@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "scenario_id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "title": { "type": "string" },
+    "budget_limit": { "type": "number" },
+    "day_limit": { "type": "integer" },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scene_id": { "type": "string" },
+          "heading": { "type": "string" },
+          "location": { "type": "string" },
+          "time_of_day": { "type": "string" },
+          "cast": { "type": "array", "items": { "type": "string" } },
+          "stunt_required": { "type": "boolean" },
+          "special_fx": { "type": "boolean" },
+          "child_actor": { "type": "boolean" },
+          "animals": { "type": "boolean" },
+          "weather_dependency": { "type": "boolean" },
+          "summary": { "type": "string" }
+        },
+        "required": ["scene_id", "location", "time_of_day", "summary"]
+      }
+    },
+    "constraints": { "type": "object" },
+    "hidden_context": { "type": "object" },
+    "gold": {
+      "type": "object",
+      "properties": {
+        "critical_risks": { "type": "array", "items": { "type": "string" } },
+        "required_departments": { "type": "array", "items": { "type": "string" } },
+        "acceptable_schedule_patterns": { "type": "array" },
+        "budget_range": { "type": "array", "items": { "type": "number" } },
+        "must_include_mitigations": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "required": ["scenario_id", "task_id", "difficulty", "scenes", "gold"]
+}
