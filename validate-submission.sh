@@ -10,6 +10,8 @@ echo "Starting Submission Validation..."
 if [ ! -f "openenv.yaml" ]; then echo "Missing openenv.yaml"; exit 1; fi
 if [ ! -f "Dockerfile" ]; then echo "Missing Dockerfile"; exit 1; fi
 if [ ! -f "inference.py" ]; then echo "Missing inference.py"; exit 1; fi
+if [ ! -f "uv.lock" ]; then echo "Missing uv.lock - run 'uv lock' to generate it"; exit 1; fi
+if [ ! -f "server/app.py" ]; then echo "Missing server/app.py - required for multi-mode deployment"; exit 1; fi
 
 # 2. Package verification
 echo "Running Unit Tests..."
