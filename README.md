@@ -65,7 +65,24 @@ We use a **Hybrid Scoring System** (0.0 to 1.0):
 3.  **Schedule Feasibility (15%)**: Is the shooting order logical and efficient?
 4.  **AI Strategy Rationale (40%)**: Gemini 3 Flash evaluates the qualitative depth of the agent's safety explanations.
 
----
+## 📂 Project Structure
+
+```text
+cinesafe-openenv/
+├── cinesafe_openenv/
+│   ├── baseline/          # Rule-based agent logic
+│   ├── data/              # JSON scenarios (Easy, Medium, Hard)
+│   ├── graders/           # Deterministic & AI (Gemini 3) Graders
+│   ├── server/            # FastAPI Environment Server
+│   └── (core modules)     # Models, Reward, Action Handlers, Loader
+├── tests/                 # Full verification suite
+├── inference.py           # [MANDATORY] Submission entry point
+├── validate-submission.sh # [MANDATORY] Pre-submission validator
+├── Dockerfile             # Container configuration
+├── openenv.yaml           # Deployment manifest
+├── pyproject.toml         # Dependency & Package metadata
+└── README.md              # Project documentation
+```
 
 ## 🚀 Quickstart
 
