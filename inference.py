@@ -12,7 +12,7 @@ MODEL_NAME = os.getenv("MODEL_NAME", "gemini-3-flash-preview")
 HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("GEMINI_API_KEY")
 
 # Combine all into the client
-client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN)
+client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN) if HF_TOKEN else None
 
 async def run_inference():
     env = CineSafeEnvironment()
@@ -39,6 +39,8 @@ async def run_inference():
         
         # 2. Call LLM (Mandatory OpenAI Client usage)
         try:
+            if client is None:
+                raise RuntimeError("Missing HF_TOKEN/GEMINI_API_KEY")
             response = client.chat.completions.create(
                 model=MODEL_NAME,
                 messages=[{"role": "user", "content": prompt}],
@@ -68,6 +70,6 @@ async def run_inference():
     print(f"[END] success={str(success).lower()} steps={obs.step_count} rewards={rewards_str}")
 
 if __name__ == "__main__":
-    if not API_KEY:
-        print("Warning: API_KEY/HF_TOKEN not set. Running in pseudo-inference mode.")
+    if not HF_TOKEN:
+        print("Warning: HF_TOKEN/GEMINI_API_KEY not set. Running in pseudo-inference mode.")
     asyncio.run(run_inference())
