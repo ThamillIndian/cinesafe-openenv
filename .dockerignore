@@ -1,16 +1,19 @@
-.git
-.gitignore
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
+# Ignore local environments
 .venv/
 venv/
+env/
+__pycache__/
+*.pyc
+
+# Ignore git metadata
+.git/
+.gitignore
+
+# Ignore secrets
 .env
-*.log
-build/
-dist/
+
+# Ignore build artifacts
 *.egg-info/
+dist/
+build/
+uv.lock
