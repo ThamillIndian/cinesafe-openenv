@@ -7,11 +7,12 @@ from cinesafe_openenv.server.environment import CineSafeEnvironment
 from cinesafe_openenv.models import CineSafeAction
 
 # Mandatory Env Vars
-API_BASE_URL = os.getenv("API_BASE_URL") or "https://generativelanguage.googleapis.com/v1beta/openai/"
-MODEL_NAME = os.getenv("MODEL_NAME") or "gemini-3-flash-preview"
-API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("HF_TOKEN") or os.getenv("OPEN_AI_API_KEY")
+API_BASE_URL = os.getenv("API_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
+MODEL_NAME = os.getenv("MODEL_NAME", "gemini-3-flash-preview")
+HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("GEMINI_API_KEY")
 
-client = OpenAI(base_url=API_BASE_URL, api_key=API_KEY)
+# Combine all into the client
+client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN)
 
 async def run_inference():
     env = CineSafeEnvironment()
