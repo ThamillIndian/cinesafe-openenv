@@ -1,5 +1,25 @@
 {
+  "0": {
+    "easy": ["easy_001"],
+    "medium": ["medium_001"],
+    "hard": ["hard_001"]
+  },
+  "1": {
+    "easy": ["easy_001"],
+    "medium": ["medium_001"],
+    "hard": ["hard_001"]
+  },
+  "42": {
+    "easy": ["easy_001"],
+    "medium": ["medium_001"],
+    "hard": ["hard_001"]
+  },
   "100": {
+    "easy": ["easy_001"],
+    "medium": ["medium_001"],
+    "hard": ["hard_001"]
+  },
+  "123": {
     "easy": ["easy_001"],
     "medium": ["medium_001"],
     "hard": ["hard_001"]

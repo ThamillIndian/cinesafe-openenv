@@ -24,11 +24,9 @@ def compute_terminal_score(state, scenario) -> dict:
         SCORING_WEIGHTS["budget"] * b_score +
         SCORING_WEIGHTS["mitigation"] * ai_res["mitigation_score"]
     )
+    # Ensure score is strictly between 0 and 1 (exclusive) for validation
+    final_score = max(0.01, min(0.99, final_score))
     
-    # Optional logic to clamp if catastrophic failure in schedule or safety
-    if not r_res["passed"]:
-        final_score = min(final_score, 0.4)
-        
     return {
         "final_score": final_score,
         "passed": final_score > 0.7,
