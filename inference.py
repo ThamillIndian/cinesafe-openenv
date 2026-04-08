@@ -49,10 +49,10 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
             break
 
     final_scores = env.state().final_scores if hasattr(env.state(), "final_scores") else {}
-    success = bool(final_scores.get("passed", False))
     # Emit exactly one terminal task score in strict (0,1) for validator parsing.
     task_score = final_scores.get("final_score", obs.reward)
     task_score = max(0.01, min(0.99, float(task_score)))
+    success = task_score > 0.7
     print(f"[END] success={str(success).lower()} steps={obs.step_count} rewards={task_score:.2f}")
 
 
