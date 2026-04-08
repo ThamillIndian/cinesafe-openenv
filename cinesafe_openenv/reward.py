@@ -16,8 +16,9 @@ class RewardEngine:
         
         if action.action_type == "submit_final_plan":
             terminal_results = compute_terminal_score(state, scenario)
-            # Log the scores onto the state object
-            state.final_scores = terminal_results["breakdown"]
+            # Keep the full terminal payload so downstream consumers can read
+            # both pass/fail and grader breakdown.
+            state.final_scores = terminal_results
             reward = terminal_results["final_score"]
         else:
             reward = 0.0
