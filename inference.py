@@ -18,8 +18,6 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
     obs = env.reset(difficulty=difficulty)
     print(f"[START] task_id={obs.task_id} difficulty={obs.difficulty}")
 
-    rewards_history = []
-
     for _ in range(max_steps):
         prompt = f"""
         You are a film production safety agent.
@@ -45,7 +43,6 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
             action = CineSafeAction(action_type="submit_final_plan")
 
         obs = env.step(action)
-        rewards_history.append(obs.reward)
         print(f"[STEP] step={obs.step_count} action={action.action_type} reward={obs.reward:.2f}")
 
         if obs.done:
@@ -53,8 +50,10 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
 
     final_scores = env.state().final_scores if hasattr(env.state(), "final_scores") else {}
     success = bool(final_scores.get("passed", False))
-    rewards_str = ",".join([f"{r:.2f}" for r in rewards_history])
-    print(f"[END] success={str(success).lower()} steps={obs.step_count} rewards={rewards_str}")
+    # Emit exactly one terminal task score in strict (0,1) for validator parsing.
+    task_score = final_scores.get("final_score", obs.reward)
+    task_score = max(0.01, min(0.99, float(task_score)))
+    print(f"[END] success={str(success).lower()} steps={obs.step_count} rewards={task_score:.2f}")
 
 
 async def run_inference():
