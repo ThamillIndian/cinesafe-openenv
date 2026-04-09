@@ -9,7 +9,7 @@ app_port: 7860
 ---
 
 # 🎬 CineSafe-OpenEnv 
-### *Reliable AI Planning for Real-World Film Production Safety*
+### *Reliable AI Planning for RealWorld Film Production Safety*
 
 [![OpenEnv Spec](https://img.shields.io/badge/OpenEnv-Compatible-green)](https://github.com/meta-pytorch-hackathon/openenv)
 [![Model](https://img.shields.io/badge/Judge-Gemini_3_Flash-blue)](https://deepmind.google/technologies/gemini/)
