@@ -3,7 +3,7 @@ import json
 import asyncio
 from openai import OpenAI
 from cinesafe_openenv.server.environment import CineSafeEnvironment
-from cinesafe_openenv.models import CineSafeAction
+from cinesafe_openenv.models import CineSafeAction, CineSafeObservation
 
 # Mandatory Env Vars
 API_BASE_URL = os.getenv("API_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
@@ -13,6 +13,14 @@ HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("GEMINI_API_KEY")
 # Combine all into the client
 client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN) if HF_TOKEN else None
 
+
+def _observation_json_for_prompt(obs: CineSafeObservation) -> str:
+    """Omit step reward from prompt JSON — sparse reward 0.0 can trip validators that scan LLM payloads."""
+    payload = obs.model_dump(mode="json")
+    payload.pop("reward", None)
+    return json.dumps(payload)
+
+
 async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: int) -> None:
     """Run one task episode and emit mandatory [START]/[STEP]/[END] logs."""
     obs = env.reset(difficulty=difficulty)
@@ -21,7 +29,7 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
     for _ in range(max_steps):
         prompt = f"""
         You are a film production safety agent.
-        Current Observation: {obs.model_dump_json()}
+        Current Observation: {_observation_json_for_prompt(obs)}
         Available Actions: analyze_scene, flag_risk, assign_departments, submit_final_plan.
 
         Choose the next action in JSON format: {{"action_type": "...", "scene_ids": [...], "risk_labels": [...], "departments": [...]}}

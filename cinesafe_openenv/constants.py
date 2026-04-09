@@ -12,6 +12,9 @@ TASK_IDS = [
     "disruption_recovery"
 ]
 
+# Observation.reward in API JSON must not be 0.0/1.0 (some validators require open (0, 1)).
+NEUTRAL_OBSERVATION_REWARD = 0.01
+
 # Risk features and labels
 RISK_CATEGORIES = [
     "stunt", "water", "crowd", "vehicle", "animal",

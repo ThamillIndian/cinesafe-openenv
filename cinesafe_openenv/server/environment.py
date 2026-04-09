@@ -7,6 +7,7 @@ from cinesafe_openenv.models import (
 from cinesafe_openenv.scenario_loader import ScenarioLoader
 from cinesafe_openenv.validators import validate_action
 from cinesafe_openenv.action_handlers import dispatch_action
+from cinesafe_openenv.constants import NEUTRAL_OBSERVATION_REWARD
 from cinesafe_openenv.reward import RewardEngine
 
 class CineSafeEnvironment:
@@ -46,7 +47,7 @@ class CineSafeEnvironment:
             action_history=[],
             partial_metrics={},
             message="Scenario loaded. Begin planning.",
-            reward=0.0,
+            reward=NEUTRAL_OBSERVATION_REWARD,
             done=False,
         )
 

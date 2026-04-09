@@ -1,5 +1,6 @@
 from cinesafe_openenv.models import CineSafeAction, CineSafeState
 from typing import Dict, Any
+from cinesafe_openenv.constants import NEUTRAL_OBSERVATION_REWARD
 from cinesafe_openenv.graders import compute_terminal_score
 
 class RewardEngine:
@@ -8,11 +9,10 @@ class RewardEngine:
         
     def compute(self, state: CineSafeState, action: CineSafeAction, result, scenario: Dict[str, Any]) -> float:
         """Computes partial/dense rewards for step interactions."""
-        reward = 0.0
-        
-        # We switch to "Sparse Rewards" to ensure compliance with the 
-        # [0.01, 0.99] total score requirement. 
-        # Intermediate steps return 0.0, and the final plan returns the full score.
+        reward = NEUTRAL_OBSERVATION_REWARD
+
+        # Sparse terminal reward on submit; non-terminal steps use NEUTRAL_OBSERVATION_REWARD
+        # so observation.reward in /step JSON is never exactly 0.0 (validator open-interval check).
         
         if action.action_type == "submit_final_plan":
             terminal_results = compute_terminal_score(state, scenario)
@@ -34,6 +34,6 @@ class RewardEngine:
             }
             reward = terminal_results["final_score"]
         else:
-            reward = 0.0
-            
+            reward = NEUTRAL_OBSERVATION_REWARD
+
         return reward
