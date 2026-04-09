@@ -20,12 +20,14 @@ def compute_terminal_score(state, scenario) -> dict:
     # Defaults for budget/mitigation to not block baseline.
     b_score = 0.99
     ai_mitigation = _clamp_open_interval(ai_res.get("mitigation_score", 0.5))
+    ai_rationale = _clamp_open_interval(ai_res.get("rationale_score", 0.5))
 
     # Clamp all grader scores to satisfy strict (0,1) validator checks.
     r_res["score"] = _clamp_open_interval(r_res["score"])
     d_res["score"] = _clamp_open_interval(d_res["score"])
     s_res["score"] = _clamp_open_interval(s_res["score"])
     ai_res["mitigation_score"] = ai_mitigation
+    ai_res["rationale_score"] = ai_rationale
     
     final_score = (
         SCORING_WEIGHTS["risk"] * r_res["score"] +

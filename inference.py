@@ -43,7 +43,8 @@ async def run_single_task(env: CineSafeEnvironment, difficulty: str, max_steps: 
             action = CineSafeAction(action_type="submit_final_plan")
 
         obs = env.step(action)
-        print(f"[STEP] step={obs.step_count} action={action.action_type} reward={obs.reward:.2f}")
+        # Do not print step reward here: sparse rewards are 0.0 and validators reject 0.0/1.0 in logs.
+        print(f"[STEP] step={obs.step_count} action={action.action_type}")
 
         if obs.done:
             break
