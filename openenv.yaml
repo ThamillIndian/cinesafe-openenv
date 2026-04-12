@@ -12,19 +12,19 @@ tags:
   - safety
 
 tasks:
-  - id: "easy_001"
+  - id: "scene_risk_triage"
     name: "CineSafe Easy Risk Triage"
     description: "Identify basic safety risks in simple scenarios."
     difficulty: "easy"
     grader: "cinesafe_openenv.graders.aggregate:grade"
     
-  - id: "medium_001"
+  - id: "multi_scene_planning"
     name: "CineSafe Medium Planning"
     description: "Coordinate multiple departments to secure hazards."
     difficulty: "medium"
     grader: "cinesafe_openenv.graders.aggregate:grade"
     
-  - id: "hard_001"
+  - id: "disruption_recovery"
     name: "CineSafe Hard Disruption"
     description: "Handle severe hazards with budget constraints."
     difficulty: "hard"
