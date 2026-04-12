@@ -51,7 +51,9 @@ class CineSafeEnvironment:
             done=False,
         )
 
-    def step(self, action: CineSafeAction):
+    def step(self, action):
+        if isinstance(action, dict):
+            action = CineSafeAction(**action)
         validate_action(action, self._state)
         result = dispatch_action(action, self._state, self.loader.current_scenario)
         reward = self.reward_engine.compute(self._state, action, result, self.loader.current_scenario)

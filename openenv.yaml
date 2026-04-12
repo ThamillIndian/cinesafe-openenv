@@ -1,6 +1,6 @@
 name: cinesafe-openenv
 description: Risk-aware film production planning environment for OpenEnv
-entry_point: cinesafe_openenv.client:CineSafeEnvClient
+entry_point: cinesafe_openenv.server.environment:CineSafeEnvironment
 server:
   app: cinesafe_openenv.server.app:app
 tags:
